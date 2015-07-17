@@ -1,4 +1,4 @@
-/target/
+/target/*
 .DS_Store
 target
 *.ipr
@@ -6,7 +6,7 @@ target
 .idea/
 *.iml
 derby.log
-metastore_db
+/metastore_db/
 ${RAW_BASE_PATH}
 {RAW_BASE_PATH}
 ${TABLE_BASE_PATH}
