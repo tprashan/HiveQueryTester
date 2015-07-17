@@ -20,3 +20,5 @@ tableBasePath
 ./src/examples/queries-files
 .idea/workspace.xml
 ./target/*
+src/examples/hive
+src/examples/queries-files
