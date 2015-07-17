@@ -19,3 +19,4 @@ tableBasePath
 ./src/examples/hive
 ./src/examples/queries-files
 .idea/workspace.xml
+./target/*
