@@ -38,12 +38,12 @@ public class QueryExecutor {
             LOGGER.log(Level.SEVERE, "Invalid variables file");
         }
 
-        String finalQuery = Utils.readFile(outputQueryFilename);
-        new Utils().runIt(finalQuery, variables);
-//        String testCaseCommand = getTestCaseCommand(config, outputQueryFilename, variables);
-//
-//        LOGGER.log(Level.INFO, "Running: {0}", testCaseCommand);
-//        Utils.runCommand(testCaseCommand, LOGGER);
+//        String finalQuery = Utils.readFile(outputQueryFilename);
+//        new Utils().runIt(finalQuery, variables);
+        String testCaseCommand = getTestCaseCommand(config, outputQueryFilename, variables);
+
+        LOGGER.log(Level.INFO, "Running: {0}", testCaseCommand);
+        Utils.runCommand(testCaseCommand, LOGGER);
 
         LOGGER.log(Level.INFO, "Asserting: {0} and {1}",
                 new Object[]{htc.getExpectedFilename(), htc.getOutputFilename()});

@@ -20,7 +20,7 @@ import org.apache.commons.io.FileUtils;
 public class Utils {
 
     private static Random random = new Random();
-    private Connection connection;
+    private Connection connection=null;
 
     public static int getRandomPositiveNumber() {
         return (random.nextInt() & Integer.MAX_VALUE);
@@ -48,24 +48,39 @@ public class Utils {
     }
 
     public void runIt(String command, Properties variables) throws Exception {
-        try {
-            Class.forName(getDriver());
-            connection = DriverManager.getConnection("jdbc:hive2://0.0.0.0:10000", "beetest", null);
-        } catch (ClassNotFoundException e) {
-            throw new IllegalArgumentException("Class not found " + e.getMessage());
-        } catch (SQLException e2){
-            throw new IllegalArgumentException("Sql exeception " + e2.getMessage());
+        if (connection == null) {
+            try {
+                Class.forName(getDriver());
+                connection = DriverManager.getConnection("jdbc:hive2://", "beetest", null);
+            } catch (ClassNotFoundException e) {
+                throw new IllegalArgumentException("Class not found " + e.getMessage());
+            } catch (SQLException e2){
+                throw new IllegalArgumentException("Sql exeception " + e2.getMessage());
+            }
         }
-        // parse command... {query...}
-        String var = " ";
-        for (String key :  variables.stringPropertyNames()) {
-            var += "set hivevar:" + key + "=" + variables.get(key)+" ";
-        }
-        System.out.println("-- "+command +var);
-        Statement stmt = connection.createStatement();
-        stmt.execute(command);
-        stmt.execute(var);
 
+        String hiveCommand = replaceVariable(command, variables).trim();
+        // parse command... {query...}
+        if(!hiveCommand.trim().matches("^[ \\\\n\\\\t]*$")) {
+            System.out.println("----- " + hiveCommand + "----- ");
+            Statement stmt = connection.createStatement();
+            stmt.execute(hiveCommand);
+        }
+
+    }
+
+    private String replaceVariable(String command, Properties variables) {
+
+        if(command.contains("${TABLE_BASE_PATH}")){
+            command = command.replace("${TABLE_BASE_PATH}", "file:///tmp/tableBasePath");
+        }
+        if(command.contains("${RAW_BASE_PATH}")){
+            command = command.replace("${RAW_BASE_PATH}","file:///tmp/rawBasePath");
+        }
+        if(command.contains("${hivevar:user}")){
+            command = command.replace("${hivevar:user}","beetest");
+        }
+        return command;
     }
 
     public void close() {
@@ -157,9 +172,9 @@ public class Utils {
         }
     }
 
-    public static void writeOnFile(String testCaseCommandFile, String testCaseCommand) throws IOException {
-        File file = new File(testCaseCommandFile);
-        FileUtils.writeStringToFile(file,testCaseCommand, true);
+    public static void writeOnFile(String testCaseCommandFileName, String testCaseCommand) throws IOException {
+        File file = new File(testCaseCommandFileName);
+        FileUtils.write(file, testCaseCommand);
     }
 
     public static String getSetUpFileName() {

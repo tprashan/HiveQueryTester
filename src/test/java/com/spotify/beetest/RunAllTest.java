@@ -12,11 +12,11 @@ public class RunAllTest {
             Logger.getLogger(QueryExecutor.class.getName());
     private String testCaseCommandFile = "./src/examples/testCaseCommand.txt";
 
-    @Test
-    public void RunTestCaseCommand() throws IOException, InterruptedException {
-        File file = new File(testCaseCommandFile);
-        String command = FileUtils.readFileToString(file);
-        Utils.runCommand("hive "+command,LOGGER);
-        file.delete();
-    }
+//    @Test
+//    public void RunTestCaseCommand() throws IOException, InterruptedException {
+//        File file = new File(testCaseCommandFile);
+//        String command = FileUtils.readFileToString(file);
+//        Utils.runCommand("hive "+command,LOGGER);
+//        file.delete();
+//    }
 }

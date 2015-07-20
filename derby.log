@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Fri Jul 17 14:44:14 IST 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-014e-9b4a-e6e1-00000680a2b0 
-on database directory /private/tmp/beetest/prashanttripathi/metastore_db with class loader sun.misc.Launcher$AppClassLoader@723279cf 
-Loaded from file:/Users/prashanttripathi/hive-0.13.1-cdh5.3.3/lib/derby-10.10.1.1.jar
+Mon Jul 20 17:51:58 IST 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-014e-ab69-dbee-000008670698 
+on database directory /Users/prashanttripathi/hiveQueryTester/HiveQueryTester/metastore_db with class loader sun.misc.Launcher$AppClassLoader@14ae5a5 
+Loaded from file:/Users/prashanttripathi/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_45-b14
-user.dir=/Users/prashanttripathi/hiveTester/HiveQueryTester
+user.dir=/Users/prashanttripathi/hiveQueryTester/HiveQueryTester
 os.name=Mac OS X
 os.arch=x86_64
 os.version=10.9.5

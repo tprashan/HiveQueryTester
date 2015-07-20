@@ -26,7 +26,8 @@ public class DDLRunner {
         FileUtils.deleteDirectory(new File("./tableBasePath"));
         SchemaGenerator createSchemaFile = new SchemaGenerator(HIVE_QUERY_DIRECTORY);
         String queryFile = createSchemaFile.getCreateQuerySetup();
-
+        System.out.println("--------------------------------------------- "+queryFile );
+        Utils utils = new Utils();
         Properties variables = new Properties();
         try {
             variables.load(new FileInputStream(VARIABLE_FILE_NAME));
@@ -36,9 +37,9 @@ public class DDLRunner {
             LOGGER.log(Level.SEVERE, "Invalid variables file");
         }
         String finalQuery = Utils.readFile(queryFile);
-        String[] executions = finalQuery.split(";");
+        String[] executions = finalQuery.split(";\n");
         for (String ex : executions) {
-            new Utils().runIt(ex,variables);
+            utils.runIt(ex, variables);
         }
 //        String testCaseCommand = QueryExecutor.getTestCaseCommand(LOCAL_CONFIG,queryFile,variables);
 //        LOGGER.log(Level.INFO, "Running: {0}", testCaseCommand);
