@@ -71,8 +71,8 @@ public class ImportBuilderRepairOptionTest {
 
         schemaGenerator.generateFinalQuery(tableNames, queryFile, textFilesDirectory, htc, generatedQueryFilename);
         QueryExecutor.run(htc, localConfig);
-        FileUtils.deleteDirectory(new File("./rawBasePath"));
-        FileUtils.deleteDirectory(new File("./tableBasePath"));
+        FileUtils.deleteDirectory(new File("/tmp/rawBasePath"));
+        FileUtils.deleteDirectory(new File("/tmp/tableBasePath"));
 
         FileAssert.assertEquals("Output does not match",
                 new File(htc.getExpectedFilename()),

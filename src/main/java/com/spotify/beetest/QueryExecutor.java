@@ -28,7 +28,7 @@ public class QueryExecutor {
 
     public static void run(HiveTestCase htc, String config) throws Exception {
         String outputQueryFilename = htc.generateTestCaseQueryFile();
-
+        Utils utils = new Utils();
         Properties variables = new Properties();
         try {
             variables.load(new FileInputStream(htc.getVariablesFilename()));
@@ -38,12 +38,16 @@ public class QueryExecutor {
             LOGGER.log(Level.SEVERE, "Invalid variables file");
         }
 
-//        String finalQuery = Utils.readFile(outputQueryFilename);
-//        new Utils().runIt(finalQuery, variables);
-        String testCaseCommand = getTestCaseCommand(config, outputQueryFilename, variables);
+        String finalQuery = Utils.readFile(outputQueryFilename);
+        String[] executions = finalQuery.split(";\n");
+        for (String ex : executions) {
+            utils.runIt(ex, variables);
+        }
 
-        LOGGER.log(Level.INFO, "Running: {0}", testCaseCommand);
-        Utils.runCommand(testCaseCommand, LOGGER);
+//        String testCaseCommand = getTestCaseCommand(config, outputQueryFilename, variables);
+//
+//        LOGGER.log(Level.INFO, "Running: {0}", testCaseCommand);
+//        Utils.runCommand(testCaseCommand, LOGGER);
 
         LOGGER.log(Level.INFO, "Asserting: {0} and {1}",
                 new Object[]{htc.getExpectedFilename(), htc.getOutputFilename()});

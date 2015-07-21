@@ -37,6 +37,6 @@ public class CatBuilderRepairOption {
     String GROUPNO ;
 
     public String getStringRepresentation(String separator) {
-        return builder().build().toString().replace(",",separator);
+        return ROID + separator + EQUIPMENTID;
     }
 }

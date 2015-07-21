@@ -22,11 +22,10 @@ public class DDLRunner {
 
     @Test
     public void runDDL() throws Exception {
-        FileUtils.deleteDirectory(new File("./rawBasePath"));
-        FileUtils.deleteDirectory(new File("./tableBasePath"));
+        FileUtils.deleteDirectory(new File("/tmp/rawBasePath"));
+        FileUtils.deleteDirectory(new File("/tmp/tableBasePath"));
         SchemaGenerator createSchemaFile = new SchemaGenerator(HIVE_QUERY_DIRECTORY);
         String queryFile = createSchemaFile.getCreateQuerySetup();
-        System.out.println("--------------------------------------------- "+queryFile );
         Utils utils = new Utils();
         Properties variables = new Properties();
         try {
